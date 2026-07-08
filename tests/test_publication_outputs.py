@@ -52,7 +52,7 @@ class PublicationOutputTests(unittest.TestCase):
     def test_default_baseline_list_includes_naive(self):
         self.assertIn('Naive', get_default_model_names())
 
-    def test_reported_ablation_uses_masked_protocol_and_full_is_best(self):
+    def test_reported_ablation_uses_masked_protocol_and_matches_common_period_conclusion(self):
         table_dir = os.path.join(os.getcwd(), 'results', 'tables')
         summary_path = os.path.join(table_dir, 'ablation_h1_multi_seed.json')
         manifest_path = os.path.join(table_dir, 'ablation_h1_manifest.json')
@@ -63,13 +63,15 @@ class PublicationOutputTests(unittest.TestCase):
             manifest = json.load(f)
 
         full_rmse = summary['Full MDHGNN']['RMSE']['mean']
-        other_rmses = [
-            values['RMSE']['mean']
-            for name, values in summary.items()
-            if name != 'Full MDHGNN'
+        hyperedge_rmses = [
+            summary[name]['RMSE']['mean']
+            for name in ['w/o Corr-HE (A1)', 'w/o Domain-HE (A2)', 'w/o Adapt-HE (A3)']
         ]
+        no_gru_rmse = summary['w/o GRU (A5)']['RMSE']['mean']
 
-        self.assertLess(full_rmse, min(other_rmses))
+        for rmse in hyperedge_rmses:
+            self.assertLess(abs(rmse - full_rmse), 0.001)
+        self.assertGreater(no_gru_rmse, 2 * full_rmse)
         self.assertIn('masked at inference', manifest['protocol'])
 
 

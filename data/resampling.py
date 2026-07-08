@@ -55,7 +55,7 @@ def resample_external_prices(df: pd.DataFrame, freq: str = 'W-FRI') -> pd.DataFr
     for col in return_cols:
         base = col.replace('_Return', '_Close')
         if base in weekly.columns:
-            weekly[col] = weekly[base].pct_change().fillna(0)
+            weekly[col] = weekly[base].pct_change(fill_method=None).fillna(0)
 
     weekly = weekly.dropna(subset=close_cols)
     weekly = weekly.reset_index()

@@ -3,6 +3,21 @@ import numpy as np
 from typing import Tuple, Dict
 
 
+def filter_sample_period(
+    df: pd.DataFrame,
+    start_date: str = None,
+    end_date: str = None,
+) -> pd.DataFrame:
+    """Restrict a dated DataFrame to the configured modelling sample period."""
+    result = df.copy()
+    result['Date'] = pd.to_datetime(result['Date'])
+    if start_date is not None:
+        result = result[result['Date'] >= pd.to_datetime(start_date)]
+    if end_date is not None:
+        result = result[result['Date'] <= pd.to_datetime(end_date)]
+    return result.reset_index(drop=True)
+
+
 def preprocess_data(
     copper_df: pd.DataFrame,
     external_df: pd.DataFrame = None,
@@ -20,7 +35,7 @@ def preprocess_data(
         df = pd.merge(df, external_df, on='Date', how='left')
         ext_cols = [c for c in external_df.columns if c != 'Date']
         for col in ext_cols:
-            df[col] = df[col].ffill().bfill()
+            df[col] = df[col].ffill()
 
     # Select feature columns (exclude Date)
     feature_cols = [c for c in df.columns if c != 'Date']

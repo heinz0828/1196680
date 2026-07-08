@@ -22,7 +22,7 @@ from data.data_loader import load_copper_data
 from data.dataset import create_dataloaders
 from data.external_data import download_external_data
 from data.feature_engineering import add_technical_indicators
-from data.preprocessing import preprocess_data
+from data.preprocessing import filter_sample_period, preprocess_data
 from data.resampling import resample_copper_ohlcv, resample_external_prices
 from models.mdhgnn import MDHGNN
 from trainers.trainer import Trainer
@@ -42,6 +42,10 @@ MASKED_VARIANTS = {
 
 def prepare_data(cfg, frequency, no_external):
     copper_df = load_copper_data(cfg.csv_path)
+    if cfg.require_common_real_period:
+        copper_df = filter_sample_period(
+            copper_df, cfg.sample_start_date, cfg.sample_end_date
+        )
     if frequency == "weekly":
         copper_df = resample_copper_ohlcv(copper_df)
     copper_df = add_technical_indicators(copper_df, params=cfg.indicator_params)

@@ -88,7 +88,7 @@ def diebold_mariano_test(e1, e2, horizon=1):
         nw_var += 2 * (1 - k / horizon) * gamma_k
 
     dm_stat = d_bar / np.sqrt(max(nw_var, 1e-12) / n)
-    p_value = 2 * (1 - stats.t.cdf(abs(dm_stat), df=n - 1))
+    p_value = 2 * stats.t.sf(abs(dm_stat), df=n - 1)
     return {'DM_stat': dm_stat, 'p_value': p_value}
 
 

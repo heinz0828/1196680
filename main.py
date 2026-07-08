@@ -12,7 +12,7 @@ from data.data_loader import load_copper_data
 from data.external_data import download_external_data
 from data.feature_engineering import add_technical_indicators
 from data.resampling import resample_copper_ohlcv, resample_external_prices
-from data.preprocessing import preprocess_data
+from data.preprocessing import filter_sample_period, preprocess_data
 from data.dataset import create_dataloaders
 from models.mdhgnn import MDHGNN
 from trainers.trainer import Trainer
@@ -45,6 +45,14 @@ def main():
     print("\n--- Loading copper futures data ---")
     copper_df = load_copper_data(cfg.csv_path)
     print(f"Daily data: {len(copper_df)} rows, {copper_df['Date'].min()} to {copper_df['Date'].max()}")
+    if cfg.require_common_real_period:
+        copper_df = filter_sample_period(
+            copper_df, cfg.sample_start_date, cfg.sample_end_date
+        )
+        print(
+            "Common real-data period: "
+            f"{copper_df['Date'].min().date()} to {copper_df['Date'].max().date()}"
+        )
 
     # Resample to weekly if needed
     if cfg.frequency == 'weekly':

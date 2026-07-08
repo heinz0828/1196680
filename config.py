@@ -31,6 +31,9 @@ class Config:
     # Data
     csv_path: str = 'data/raw/Copper Futures Historical Data.csv'
     external_cache: str = 'data/raw/external_data.csv'
+    require_common_real_period: bool = True
+    sample_start_date: str = '2011-07-22'
+    sample_end_date: str = '2016-01-29'
     frequency: str = 'weekly'
     window_size: int = 20
     horizon: int = 1

@@ -66,11 +66,6 @@ def download_external_data(start_date: str, end_date: str,
     end = pd.to_datetime(end_date)
     result = result[(result['Date'] >= start) & (result['Date'] <= end)]
 
-    # Forward fill then backward fill
-    for col in result.columns:
-        if col != 'Date':
-            result[col] = result[col].ffill().bfill()
-
     result = result.reset_index(drop=True)
     print(f"External data loaded: {len(result)} rows, "
           f"{result['Date'].min().date()} to {result['Date'].max().date()}")
