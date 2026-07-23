@@ -1,0 +1,55 @@
+{
+  "script": "experiments/redraw_publication_figures.py",
+  "training": "No training was performed. Existing checkpoints were loaded for test-set inference.",
+  "seed_for_prediction_curves": 456,
+  "frequency": "weekly",
+  "date_ranges": {
+    "common_real_daily": [
+      "2011-07-22",
+      "2016-01-29",
+      1146
+    ],
+    "weekly_before_indicators": [
+      "2011-07-22",
+      "2016-01-29",
+      237
+    ],
+    "final_after_indicators": [
+      "2012-01-13",
+      "2016-01-29",
+      212
+    ],
+    "train": [
+      "2012-01-13",
+      "2014-11-07"
+    ],
+    "validation": [
+      "2014-11-14",
+      "2015-04-03"
+    ],
+    "test": [
+      "2015-04-10",
+      "2016-01-29"
+    ]
+  },
+  "figures": [
+    "publication_pred_MDHGNN_h1.png",
+    "publication_pred_GRU_h1.png",
+    "publication_pred_MLP_h1.png",
+    "publication_pred_Transformer_h1.png",
+    "publication_pred_Naive_h1.png",
+    "publication_all_preds_h1.png",
+    "publication_compare_RMSE_h1.png",
+    "publication_compare_DA_h1.png",
+    "publication_compare_Sharpe_h1.png",
+    "publication_pred_MDHGNN_h2.png",
+    "publication_pred_GRU_h2.png",
+    "publication_pred_MLP_h2.png",
+    "publication_pred_Transformer_h2.png",
+    "publication_pred_Naive_h2.png",
+    "publication_all_preds_h2.png",
+    "publication_compare_RMSE_h2.png",
+    "publication_compare_DA_h2.png",
+    "publication_compare_Sharpe_h2.png"
+  ]
+}
