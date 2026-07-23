@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-07-04T15:40:00",
+  "frequency": "weekly",
+  "horizons": [
+    1,
+    2
+  ],
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "target_policy": "The model directly predicts future returns. Prices are reconstructed from P_{t-1} and predicted returns. Direction metrics are derived from return signs.",
+  "data": {
+    "common_real_daily_range": [
+      "2011-07-22",
+      "2016-01-29",
+      1146
+    ],
+    "weekly_range_before_indicators": [
+      "2011-07-22",
+      "2016-01-29",
+      237
+    ],
+    "final_range_after_indicators": [
+      "2012-01-13",
+      "2016-01-29",
+      212
+    ],
+    "feature_count": 30,
+    "window_size": 12,
+    "split": {
+      "train": "2012-01-13 to 2014-11-07",
+      "validation": "2014-11-14 to 2015-04-03",
+      "test": "2015-04-10 to 2016-01-29"
+    },
+    "actual_target_samples_h1": {
+      "train": 136,
+      "validation": 21,
+      "test": 42
+    }
+  },
+  "active_hyperedges": {
+    "correlation_soft_hyperedges": 90,
+    "domain_prior_hyperedges": 9,
+    "adaptive_hyperedges": 8,
+    "total": 107
+  },
+  "main_result_files": [
+    "results_h1.json",
+    "results_h2.json",
+    "results_multi_horizon.json",
+    "dm_h1.json",
+    "dm_h2.json"
+  ],
+  "ablation_protocol": "Train Full MDHGNN once per seed; evaluate the same checkpoint with one channel/path masked at inference.",
+  "ablation_result_files": [
+    "ablation_h1_per_seed.json",
+    "ablation_h1_multi_seed.json",
+    "ablation_h1_manifest.json",
+    "masked_ablation_h1_per_seed.json",
+    "masked_ablation_h1_multi_seed.json",
+    "masked_ablation_h1_manifest.json"
+  ],
+  "note": "All reported experiments use the common real-observation period beginning on 2011-07-22. The final modelling sample starts on 2012-01-13 after weekly resampling and technical-indicator construction. The main comparison should not claim MDHGNN is best on every metric; it is competitive at h=1, while MLP/Naive remain stronger on some h=2 metrics."
+}

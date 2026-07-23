@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-07-15T18:35:06",
+  "frequency": "weekly",
+  "horizon": 1,
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "protocol": "Train Full MDHGNN once per seed; evaluate the same checkpoint with one channel/path masked at inference.",
+  "variants": {
+    "Full MDHGNN": {
+      "mask": [
+        true,
+        true,
+        true
+      ],
+      "use_gru": true
+    },
+    "w/o Corr-HE (A1)": {
+      "mask": [
+        false,
+        true,
+        true
+      ],
+      "use_gru": true
+    },
+    "w/o Domain-HE (A2)": {
+      "mask": [
+        true,
+        false,
+        true
+      ],
+      "use_gru": true
+    },
+    "w/o Adapt-HE (A3)": {
+      "mask": [
+        true,
+        true,
+        false
+      ],
+      "use_gru": true
+    },
+    "w/o GRU (A5)": {
+      "mask": [
+        true,
+        true,
+        true
+      ],
+      "use_gru": false
+    }
+  },
+  "result_files": [
+    "ablation_h1_per_seed.json",
+    "ablation_h1_multi_seed.json",
+    "masked_ablation_h1_per_seed.json",
+    "masked_ablation_h1_multi_seed.json"
+  ]
+}

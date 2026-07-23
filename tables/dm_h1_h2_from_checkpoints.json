@@ -1,0 +1,69 @@
+{
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "model_names": [
+    "MDHGNN",
+    "GRU",
+    "MLP",
+    "Transformer",
+    "Naive"
+  ],
+  "feature_count": 30,
+  "dm_results": {
+    "1": {
+      "GRU": {
+        "DM_stat": -8.168815961912298,
+        "p_value": 1.7763568394002505e-15,
+        "n_errors": 606,
+        "direction": "MDHGNN better"
+      },
+      "MLP": {
+        "DM_stat": -19.4015738797731,
+        "p_value": 0.0,
+        "n_errors": 606,
+        "direction": "MDHGNN better"
+      },
+      "Transformer": {
+        "DM_stat": -13.511432840639866,
+        "p_value": 0.0,
+        "n_errors": 606,
+        "direction": "MDHGNN better"
+      },
+      "Naive": {
+        "DM_stat": 6.207380812197293,
+        "p_value": 1.0006653283767264e-09,
+        "n_errors": 606,
+        "direction": "Naive better"
+      }
+    },
+    "2": {
+      "GRU": {
+        "DM_stat": -18.461491482869068,
+        "p_value": 0.0,
+        "n_errors": 1206,
+        "direction": "MDHGNN better"
+      },
+      "MLP": {
+        "DM_stat": -121.71592013885005,
+        "p_value": 0.0,
+        "n_errors": 1206,
+        "direction": "MDHGNN better"
+      },
+      "Transformer": {
+        "DM_stat": -18.85165735940438,
+        "p_value": 0.0,
+        "n_errors": 1206,
+        "direction": "MDHGNN better"
+      },
+      "Naive": {
+        "DM_stat": 6.294987236423444,
+        "p_value": 4.296849542839709e-10,
+        "n_errors": 1206,
+        "direction": "Naive better"
+      }
+    }
+  }
+}
